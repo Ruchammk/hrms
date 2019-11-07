@@ -1,0 +1,290 @@
+/* Add here all your css styles (customizations) */
+
+/*************************************************************************/
+/* Login / Signup Page Custom Styles                                     */
+/*************************************************************************/
+
+
+body{
+    background: #18308a;
+    background: -webkit-linear-gradient(right, #021B79, #18308a, #0575E6);
+    background: -o-linear-gradient(right, #021B79, #18308a, #0575E6);
+    background: linear-gradient(to right, #021B79, #18308a, #0575E6);
+    font-family: 'Nunito', sans-serif!important;
+}
+
+
+/* this is added by me - once you fix the scroller, remove it */
+
+.login-wrapper{
+    height: 100vh;
+}
+
+.login-wrapper .container{
+    height: 100%;
+}
+
+.reg-block{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    border-top: 0px;
+    border-radius: 7px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.reg-block h2{
+    color: #fff;
+    font-weight: 700;
+    margin-top: 0px;
+    font-family: 'Nunito', sans-serif!important;
+}
+
+.reg-block .nav-tabs{
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    display: none;
+}
+
+.reg-block .nav-tabs>li.active>a, .reg-block .nav-tabs>li.active>a:hover, .reg-block .nav-tabs>li.active>a:focus{
+    color: #fff;
+    background: transparent;
+}
+
+.reg-block .tab-v2 .nav-tabs li.active a{
+    border-top: 1px solid #eee;
+}
+
+.reg-block .nav-tabs>li>a{
+    color: #fff;
+}
+
+.reg-block-header{
+    border-bottom: 0px;
+}
+
+.reg-block .nav>li>a:hover, .reg-block .nav>li>a:focus{
+    background: transparent;
+}
+
+.reg-block input{
+    background: transparent;
+    color: #fff;
+}
+
+.reg-block input::placeholder{
+    color: #fff;
+}
+
+.reg-block .input-group-addon{
+    border: 1px solid #fff;
+}
+
+.reg-block .input-group-addon i{
+    color: #fff;
+}
+
+.reg-block .form-control{
+    border: 1px solid #fff;
+}
+
+.reg-block .btn-u{
+    background: #fff;
+    width: 100%;
+    padding: 5px 20px;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #041c7a;
+}
+
+.reg-block label{
+    color: #fff;
+}
+
+.forget-password h4{
+    color: #fff;
+}
+
+.forget-password p{
+    color: #fff;
+}
+
+.forget-password p a{
+    color: #05e569!important;
+}
+
+.forget-form h3{
+    color: #fff!important;
+    font-family: 'Nunito', sans-serif!important;
+}
+
+.forget-form p{
+    color: #fff!important;
+    font-family: 'Nunito', sans-serif!important;
+}
+
+#back-btn{
+    margin-bottom: 15px;
+}
+
+.alert{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.alert p{
+    color: #adadad;
+    margin-bottom: 0px;
+}
+
+.alert p:hover{
+    color: #fff;
+}
+
+.fgt-password{
+    margin: 15px 0px 0px 0px;
+    color: #fff;
+    text-align: right;
+}
+
+.fgt-password a{
+    color: #FFFFFFE0;
+}
+
+.fgt-password a:hover{
+    color: #fff;
+}
+
+#stripes-login {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-transform: skewY(-12deg);
+    transform: skewY(-12deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    /* background: #000046;
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
+background: linear-gradient(to right, #1CB5E0, #000046);  */
+background: #18308a;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #021B79, #18308a, #0575E6);
+background: linear-gradient(to left, #021B79, #18308a, #0575E6);
+
+
+
+
+}
+
+#stripes-login, #stripes-login span {
+    position: absolute;
+}
+
+#stripes-login :first-child {
+    width: 40%;
+    left: 40%;
+    top: 40px;
+    background: #0c5bc3;
+}
+
+#stripes-login :nth-child(2) {
+    width: 10%;
+    right: 0;
+    bottom: 40px;
+    background: #184fc6;
+}
+
+#stripes-login :nth-child(3) {
+    width: 25%;
+    bottom: 0;
+    right: 0;
+    background: #1a49af;
+}
+
+
+@media (min-width: 670px){
+    #stripes-login :first-child {
+        top: 0;
+        background: #0c5bc3;
+    }
+
+    #stripes-login :nth-child(2) {
+        width: 16.66667%;
+        width: calc(100% / 6);
+        top: 300px;
+        top: calc(150px * 2);
+        bottom: auto;
+        background: #184fc6;
+    }
+
+    #stripes-login :nth-child(3) {
+        width: 25%;
+        width: calc(100% / 4);
+        right: auto;
+        background: #1a49af;
+    }
+
+    #stripes-login span {
+        height: 150px;
+    }
+}
+
+
+@media (min-width: 880px){
+    #stripes-login :first-child {
+        width: 25%;
+        width: calc(100% / 4);
+        left: -16.66666%;
+        left: calc(calc(calc(100% / 4) / 2) * -1);
+        background: #0c5bc3;
+    }
+
+    #stripes-login span {
+        height: 150px;
+    }
+
+    #stripes-login :nth-child(2) {
+        width: 25%;
+        width: calc(100% / 4);
+        top: 0;
+        left: 16.66666%;
+        left: calc(calc(100% / 4) / 2);
+        right: auto;
+        background: #184fc6;
+    }
+
+    #stripes-login :nth-child(3) {
+        width: 25%;
+        width: calc(100% / 4);
+        left: 49.99999%;
+        left: calc(calc(calc(100% / 4) / 2) + calc(100% / 4));
+        bottom: auto;
+        background: #1a49af;
+    }
+
+    #stripes-login :nth-child(4) {
+        width: 25%;
+        width: calc(100% / 4);
+        top: 380px;
+        top: calc(190px * 2);
+        right: -16.66666%;
+        right: calc(calc(calc(100% / 4) / 2) * -1);
+        background: #0c2581;
+    }
+
+    #stripes-login :nth-child(5) {
+        width: 25%;
+        width: calc(100% / 4);
+        bottom: 0;
+        background: #0f54ba;
+    }
+}
+
+
+
+
+/*************************************************************************/
+/* Please add section names for which you are adding custom styles       */
+/*************************************************************************/

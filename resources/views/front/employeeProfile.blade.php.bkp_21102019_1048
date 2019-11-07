@@ -1,0 +1,898 @@
+@extends('front.layouts.frontlayout')
+
+@section('mainarea')
+
+{!! HTML::style('/css/custom-emp-profile-styles.css', array("name" => "core")) !!}
+
+<div class="col-md-9">
+    @if ($active_company->license_expired == 1)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger"><i class="fa fa-close"></i> Your companies account has been
+                disabled. Please contact your manager for further details.
+            </div>
+        </div>
+    </div>
+    @endif
+    @if ($active_company->license_expired != 1)
+    <!--Profile Body-->
+    <div class="profile-body">
+        <div class="row">
+            <!--Profile Post-->
+            <!-- <div class="col-sm-6">
+                <div class="panel panel-profile no-bg">
+                    <div class="panel-heading overflow-h  service-block-u">
+                        <h2 class="panel-title heading-sm pull-left"><i
+                                    class="fa fa-user"></i>{{__('core.personalDetails')}}</h2>
+                    </div>
+                    <div class="panel-body panelHolder">
+                        <table class="table table-light margin-bottom-0">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.name')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->full_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.father_name')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->father_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.dob')}}</span>
+                                </td>
+                                <td>
+                                    {!!  date('d-M-Y',strtotime($employee->date_of_birth)) !!}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.gender')}}</span>
+                                </td>
+                                <td>
+                                    {{ucfirst($employee->gender)}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.email')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->email}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.phone')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->mobile_number}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.local_address')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->local_address}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.permanent_address')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->permanent_address}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel panel-profile no-bg margin-top-20">
+                    <div class="panel-heading overflow-h service-block-u">
+                        <h2 class="panel-title heading-sm pull-left"><i
+                                    class="fa fa-briefcase"></i>{{__('core.companyDetails')}}</h2>
+                    </div>
+                    <div class="panel-body panelHolder">
+                        <table class="table table-light margin-bottom-0">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.employeeID')}}</span>
+                                </td>
+                                <td>
+                                    {{ $employee->employeeID }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.department')}}</span>
+                                </td>
+                                <td>
+                                    {{ $employee->getDesignation->department->name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.designation')}}</span>
+                                </td>
+                                <td>
+                                    {{$employee->getDesignation->designation}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.dateOfJoining')}}</span>
+                                </td>
+                                <td>
+                                    {!! date('d-M-Y',strtotime($employee->joining_date)) !!}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.salary')}} ( {{$setting->currency_symbol}} )</span>
+                                </td>
+                                <td>
+
+                                    @foreach($employee->salaries as $salary)
+                                        <p>@trans('core.'.$salary->type)
+                                            : {{$salary->salary}} {{$setting->currency_symbol}} </p>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel panel-profile no-bg margin-top-20">
+                    <div class="panel-heading overflow-h service-block-u">
+                        <h2 class="panel-title heading-sm pull-left"><i
+                                    class="fa fa-bank"></i>{{__('core.bankDetails')}}</h2>
+                    </div>
+                    <div class="panel-body panelHolder">
+                        <table class="table table-light margin-bottom-0">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.accountHolder')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->account_name) ? $employee->bank_details->account_name : ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.account_number')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->account_number) ? $employee->bank_details->account_number : ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.bank')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->bank) ? $employee->bank_details->bank : ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.bsb')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->bsb) ? $employee->bank_details->bsb : ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.tax_payer_id')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->tax_payer_id) ? $employee->bank_details->tax_payer_id : ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.bin')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->bin) ? $employee->bank_details->bin : ''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="primary-link">{{__('core.branch')}}</span>
+                                </td>
+                                <td>
+                                    {{isset($employee->bank_details->branch) ? $employee->bank_details->branch : ''}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
+            <!--End Profile Post-->
+
+            <!--Notice Board -->
+
+            <!-- <div class="col-sm-6 md-margin-bottom-20">
+                @if($setting->notice_feature==1)
+                    <div class="panel panel-profile  margin-bottom-20">
+                        <div class="panel-heading overflow-h service-block-u">
+                            <h2 class="panel-title heading-sm pull-left"><i
+                                        class="fa fa-bullhorn"></i>{{__('core.noticeBoard')}}</h2>
+                        </div>
+                        <div id="scrollbar2" class="panel-body contentHolder">
+
+                            @forelse($noticeboards as $notice)
+                                <div class="profile-event">
+                                    <div class="date-formats">
+                                        <span>{!! date('d',strtotime($notice->created_at)) !!}</span>
+                                        <small>{!! date('m, Y',strtotime($notice->created_at)) !!}</small>
+                                    </div>
+                                    <div class="overflow-h">
+                                        <h3 class="heading-xs"><a href="" data-toggle="modal"
+                                                                  data-target=".show_notice"
+                                                                  onclick="show_notice({{$notice->id}});return false;">{{$notice->title}}</a>
+                                        </h3>
+                                        @if(strpos($notice->description,'src')==0)
+                                            <p>{!!  \Illuminate\Support\Str::limit(strip_tags($notice->description),100) !!}</p>
+                                        @else
+                                            <p>&nbsp;</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-center" style="padding: 4px; margin-top: 26%;">No Notice</p>
+                            @endforelse
+
+                        </div>
+                    </div>
+                @endif
+
+                @if($setting->holidays_feature==1)
+                    <div class="panel panel-profile">
+                        <div class="panel-heading overflow-h service-block-u">
+                            <h2 class="panel-title heading-sm pull-left"><i
+                                        class="fa fa-send"></i> {{__('core.upcomingHolidays')}}</h2>
+                        </div>
+                        <div id="scrollbar3" class="panel-body contentHolder">
+
+                            @forelse($holidays as $holiday)
+                                {{--Check for upcoming Holidays--}}
+                                @if(strtotime($holiday->date)>time())
+                                    <div class="alert-blocks alert-blocks-{{$holiday_color[$holiday->id%count($holiday_color)]}}">
+                                        <div class="overflow-h">
+                                            <strong class="color-{{$holiday_font_color[$holiday->id%count($holiday_font_color)]}}">{{$holiday->occassion}}
+                                                <small class="pull-right">
+                                                    <em>{!! date('d M Y',strtotime($holiday->date)) !!}</em>
+                                                </small>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                @endif
+                            @empty
+                                <p class="text-center" style="padding: 4px; margin-top: 26%;">No Holiday</p>
+                            @endforelse
+
+                        </div>
+                    </div>
+                @endif
+                @if($setting->award_feature==1)
+                    <div class="panel panel-profile margin-top-20">
+                        <div class="panel-heading overflow-h service-block-u">
+                            <h2 class="panel-title heading-sm pull-left"><i
+                                        class="fa fa-trophy"></i> {{__('core.awards')}}</h2>
+                        </div>
+                        <div id="scrollbar3" class="panel-body contentHolder">
+
+                            @forelse($employee->awards as $award)
+                                <div class="alert-blocks">
+                                    <div class="overflow-h">
+                                        <strong class="color-dark">{!! \Illuminate\Support\Str::words($award->employee->full_name,1,'') !!}
+                                            <small class="pull-right">
+                                                <em>{{ucfirst($award->month)}} {{$award->year}}</em>
+                                            </small>
+                                        </strong>
+                                        <small class="award-name">{{$award->award_name}}</small>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-center" style="padding: 4px; margin-top: 26%;">No Award</p>
+                            @endforelse
+
+
+                        </div>
+                    </div>
+                @endif
+            </div> -->
+            <!--End Profile Event-->
+
+        </div><!--/end row-->
+
+        {{--  @if($setting->attendance_feature==1) --}}
+        <!--Profile Blog-->
+        <!-- <div class="panel panel-profile">
+            <div class="panel-heading overflow-h service-block-u">
+                <h2 class="panel-title heading-sm pull-left"><i
+                            class="fa fa-tasks"></i>{{__('core.attendance')}}</h2>
+            </div>
+            <div class="panel-body panelHolder">
+
+                <div class="alert-blocks alert-blocks-info">
+                    <div class="overflow-h">
+                        <strong class="color-dark">{{__('core.lastAbsent')}}
+                            <small class="pull-right"><em>{!! $employee->lastAbsent('date') !!}</em></small>
+                        </strong>
+                        <small class="award-name">{!!  $employee->lastAbsent()!!}</small>
+                    </div>
+                </div>
+
+                <div id='calendar'></div>
+
+            </div>
+        </div> --><!--/end row-->
+
+        {!!  Form::open(['method' => 'PUT','files' => true, 'class'=>' ajax_form'])  !!}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-user"></i> Personal Details</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="employeeID"> {{__('core.employeeID')}}</label>
+                                <input type="text" name="employeeID" class="form-control" value="{{ $employee->employeeID }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="full_name">{{__('core.name')}}</label>
+                                <input type="text" name="full_name" class="form-control" value="{{$employee->full_name}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="father_name">{{__('core.father_name')}}</label>
+                                <input type="text" name="father_name" class="form-control" value="{{$employee->father_name}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_birth">{{__('core.dob')}}</label>
+                                <input type="text" name="date_of_birth" class="form-control" value="{!!  date('d-M-Y',strtotime($employee->date_of_birth)) !!}">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">{{__('core.gender')}}</label>
+                                <select name="gender" id="" class="form-control">
+                                    <option value="male" @if($employee->gender == 'male') selected @endif>Male</option>
+                                    <option value="female" @if($employee->gender == 'female') selected @endif>Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">{{__('core.email')}}</label>
+                                <input type="email" name="email" class="form-control" value="{{$employee->email}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile_number">{{__('core.phone')}}</label>
+                                <input type="number" name="mobile_number" class="form-control" value="{{$employee->mobile_number}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="employee_marital_status">Marital Status</label>
+                                <select name="employee_marital_status" id="" class="form-control">
+                                    <option value="single" @if($employee->employee_marital_status == 'single') selected @endif>Single</option>
+                                    <option value="widowed" @if($employee->employee_marital_status == 'widowed') selected @endif>Widowed</option>
+                                    <option value="separated" @if($employee->employee_marital_status == 'separated') selected @endif>Separated</option>
+                                    <option value="married" @if($employee->employee_marital_status == 'married') selected @endif>Married</option>
+                                    <option value="divorced" @if($employee->employee_marital_status == 'divorced') selected @endif>Divorced</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="employee_race">Race</label>
+                                <select name="employee_race" id="" class="form-control">
+                                    <option value="african" @if($employee->employee_race == 'african') selected @endif>African</option>
+                                    <option value="african_american" @if($employee->employee_race == 'african_american') selected @endif>African-American</option>
+                                    <option value="caucasian" @if($employee->employee_race == 'caucasian') selected @endif>Caucasian</option>
+                                    <option value="chinese" @if($employee->employee_race == 'chinese') selected @endif>Chinese</option>
+                                    <option value="eurasian" @if($employee->employee_race == 'eurasian') selected @endif>Eurasian</option>
+                                    <option value="filipino" @if($employee->employee_race == 'filipino') selected @endif>Filipino</option>
+                                    <option value="indian" @if($employee->employee_race == 'indian') selected @endif>Indian</option>
+                                    <option value="japanese" @if($employee->employee_race == 'japanese') selected @endif>Japanese</option>
+                                    <option value="korean" @if($employee->employee_race == 'korean') selected @endif>Korean</option>
+                                    <option value="malay" @if($employee->employee_race == 'malay') selected @endif>Malay</option>
+                                    <option value="thai" @if($employee->employee_race == 'thai') selected @endif>Thai</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="employee_religion">Religion</label>
+                                <select name="employee_religion" id="" class="form-control">
+                                    <option value="taoism" @if($employee->employee_religion == 'taoism') selected @endif>Taoism</option>
+                                    <option value="buddhism" @if($employee->employee_religion == 'buddhism') selected @endif>Buddhism</option>
+                                    <option value="baha_i_faith" @if($employee->employee_religion == 'baha_i_faith') selected @endif>Bahá'í Faith</option>
+                                    <option value="islam" @if($employee->employee_religion == 'islam') selected @endif>Islam</option>
+                                    <option value="christianity" @if($employee->employee_religion == 'christianity') selected @endif>Christianity</option>
+                                    <option value="hinduism" @if($employee->employee_religion == 'hinduism') selected @endif>Hinduism</option>
+                                    <option value="sikhism" @if($employee->employee_religion == 'sikhism') selected @endif>Sikhism</option>
+                                    <option value="judaism" @if($employee->employee_religion == 'judaism') selected @endif>Judaism</option>
+                                    <option value="jainism" @if($employee->employee_religion == 'jainism') selected @endif>Jainism</option>
+                                    <option value="others" @if($employee->employee_religion == 'others') selected @endif>Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="local_address">{{__('core.local_address')}}</label>
+                                <textarea name="local_address" id="" cols="30" rows="3" class="form-control">{{$employee->local_address}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="permanent_address">{{__('core.permanent_address')}}</label>
+                                <textarea name="permanent_address" id="" cols="30" rows="3" class="form-control">{{$employee->permanent_address}}</textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Company Details</h3>
+                        <!--<form action="">-->
+                        <div class="form-group">
+                            <label for="employeeID">{{__('core.employeeID')}}</label>
+                            <input type="text" name="employeeID" class="form-control" value="{{$employee->employeeID}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="department">{{__('core.department')}}</label>
+                            <input type="text" name="department" class="form-control" value="{{ $employee->getDesignation->department->name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">{{__('core.designation')}}</label>
+                            <input type="text" name="designation" class="form-control" value="{{$employee->getDesignation->designation}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="joining_date">{{__('core.dateOfJoining')}}</label>
+                            <input type="text" name="joining_date" class="form-control" value="{!! date('d-M-Y',strtotime($employee->joining_date)) !!}">
+                        </div>
+                        <!--                                        <div class="form-group">
+                                                                    <label for="">End Date</label>
+                                                                    <input type="date" class="form-control">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="">{{__('core.salary')}} ( {{$setting->currency_symbol}} )</label>
+                                                                    <input type="number" class="form-control">
+                                                                </div>-->
+                        <!--</form>-->
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Statutory Details</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="">Self-Help Group Contribution</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">CDAC</option>
+                                    <option value="">CDAC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Additional Self-Help Group Contribution</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">N/A</option>
+                                    <option value="">N/A</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Branch and Role</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="">Branch</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Role</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Working Days and Hours</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="">Working day</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Working hour</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <!--                            <div class="form-holder">
+                                                <div class="notice-board">
+                                                    <h3><i class="fa fa-bullhorn"></i> Notice Board</h3>
+                                                    <div id="scrollbar2" class="panel-body contentHolder">
+                
+                                                    @forelse($noticeboards as $notice)
+                                                        <div class="profile-event">
+                                                            <div class="date-formats">
+                                                                <span>{!! date('d',strtotime($notice->created_at)) !!}</span>
+                                                                <small>{!! date('m, Y',strtotime($notice->created_at)) !!}</small>
+                                                            </div>
+                                                            <div class="overflow-h">
+                                                                <h3 class="heading-xs"><a href="" data-toggle="modal"
+                                                                                          data-target=".show_notice"
+                                                                                          onclick="show_notice({{$notice->id}});return false;">{{$notice->title}}</a>
+                                                                </h3>
+                                                                @if(strpos($notice->description,'src')==0)
+                                                                    <p>{!!  \Illuminate\Support\Str::limit(strip_tags($notice->description),100) !!}</p>
+                                                                @else
+                                                                    <p>&nbsp;</p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                        <p class="text-center" style="padding: 4px; margin-top: 26%;">No Notice</p>
+                                                    @endforelse
+                
+                                                </div>
+                                                </div>
+                                            </div>-->
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Payment Details</h3>
+                        <form action="">
+                            <!--                                        <div class="form-group">
+                                                                        <label for="">Employee ID</label>
+                                                                        <select name="" id="" class="form-control">
+                                                                            <option value="">Bank Transfer</option>
+                                                                            <option value="">Cheque</option>
+                                                                        </select>
+                                                                    </div>-->
+{{-- <!--                            <div class="form-group">
+                                <label for="">{{__('core.bank')}}</label>
+                                <select name="bank" id="" class="form-control">
+                                    <option value="22" @if($employee->bank_details->bank == '22') selected @endif>ANZ</option>
+                                    <option value="55" @if($employee->bank_details->bank == '22') selected @endif>ASB Bank Limited(New Zealand)</option>
+                                    <option value="74" @if($employee->bank_details->bank == '22') selected @endif>AXIS Bank</option>
+                                    <option value="20" @if($employee->bank_details->bank == '22') selected @endif>Allahabad</option>
+                                    <option value="79" @if($employee->bank_details->bank == '22') selected @endif>BNP Paribas</option>
+                                    <option value="91" @if($employee->bank_details->bank == '22') selected @endif>Bank of America</option>
+                                    <option value="24" @if($employee->bank_details->bank == '22') selected @endif>Bank of China</option>
+                                    <option value="9" @if($employee->bank_details->bank == '22') selected @endif>CIMB</option>
+                                    <option value="11" @if($employee->bank_details->bank == '22') selected @endif>Citibank N.A Singapore Branch (CNAS)</option>
+                                    <option value="86" @if($employee->bank_details->bank == '22') selected @endif>Citibank Singapore Limited (CSL)</option>
+                                    <option value="13" @if($employee->bank_details->bank == '22') selected @endif>Commerzbank</option>
+                                    <option value="12" @if($employee->bank_details->bank == '22') selected @endif>Crédit Agricole</option>
+                                    <option value="1" @if($employee->bank_details->bank == '22') selected @endif>DBS</option>
+                                    <option value="77" @if($employee->bank_details->bank == '22') selected @endif>DnB NOR Bank ASA</option>
+                                    <option value="3" @if($employee->bank_details->bank == '22') selected @endif>HSBC</option>
+                                    <option value="23" @if($employee->bank_details->bank == '22') selected @endif>HSBC Corporate</option>
+                                    <option value="70" @if($employee->bank_details->bank == '22') selected @endif>ICICI Bank</option>
+                                    <option value="62" @if($employee->bank_details->bank == '22') selected @endif>India - Canara Bank</option>
+                                    <option value="52" @if($employee->bank_details->bank == '22') selected @endif>India - HDFC Bank</option>
+                                    <option value="60" @if($employee->bank_details->bank == '22') selected @endif>India - State Bank of India</option>
+                                    <option value="61" @if($employee->bank_details->bank == '22') selected @endif>India - The Federal Bank Ltd</option>
+                                    <option value="2" @if($employee->bank_details->bank == '22') selected @endif>Maybank</option>
+                                    <option value="73" @if($employee->bank_details->bank == '22') selected @endif>Mizuho Corporate Bank, Ltd</option>
+                                    <option value="8" @if($employee->bank_details->bank == '22') selected @endif>OCBC</option>
+                                    <option value="6" @if($employee->bank_details->bank == '22') selected @endif>POSB</option>
+                                    <option value="7" @if($employee->bank_details->bank == '22') selected @endif>POSB Plus</option>
+                                    <option value="5" @if($employee->bank_details->bank == '22') selected @endif>RHB</option>
+                                    <option value="78" @if($employee->bank_details->bank == '22') selected @endif>Shinhan</option>
+                                    <option value="4" @if($employee->bank_details->bank == '22') selected @endif>Standard Chartered</option>
+                                    <option value="72" @if($employee->bank_details->bank == '22') selected @endif>Sumitomo Mitsui Banking Corporation</option>
+                                    <option value="71" @if($employee->bank_details->bank == '22') selected @endif>Sydbank</option>
+                                    <option value="81" @if($employee->bank_details->bank == '22') selected @endif>The Bank of Tokyo-Mitsubishi UFJ, Ltd</option>
+                                    <option value="59" @if($employee->bank_details->bank == '22') selected @endif>UBS AG</option>
+                                    <option value="10" @if($employee->bank_details->bank == '22') selected @endif>UOB</option></select>
+                                </select>
+                            </div>--> --}}
+                            <div class="form-group">
+                                <label for="account_number">{{__('core.account_number')}}</label>
+                                <input type="text" name="account_number" class="form-control" value="{{isset($employee->bank_details->account_number) ? $employee->bank_details->account_number : ''}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Bank Code</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Branch Code</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="account_name">{{__('core.accountHolder')}}</label>
+                                <input type="text" name="account_name" class="form-control" value="{{isset($employee->bank_details->account_name) ? $employee->bank_details->account_name : ''}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Swift Code</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="branch">{{__('core.branch')}}</label>
+                                <input type="text" name="branch" class="form-control" value="{{isset($employee->bank_details->branch) ? $employee->bank_details->branch : ''}}">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Employment Details</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="">Hired Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Resign Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Confirmation Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Identification Documents</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="">Immigration Status</label>
+                                <select name="" id="" class="form-control">
+                                    <option selected="selected" value="Singapore Citizen">Singapore Citizen</option>
+                                    <option value="Singapore PR">Singapore PR</option>
+                                    <option value="S Pass">S Pass</option>
+                                    <option value="E Pass">E Pass</option>
+                                    <option value="Letter of Consent(Dependent Pass, Long term visit pass)">Letter of Consent(Dependent Pass, Long term visit pass)</option>
+                                    <option value="Work Permit">Work Permit</option>
+                                    <option value="Student Visa (No CPF, No SDL)">Student Visa (No CPF, No SDL)</option>
+                                    <option value="Contract (No CPF, No SDL)">Contract (No CPF, No SDL)</option>
+                                    <option value="Contract With SDL (No CPF, W/SDL)">Contract With SDL (No CPF, W/SDL)</option>
+                                    <option value="Work Holiday Pass(No CPF)">Work Holiday Pass(No CPF)</option>
+                                    <option value="EntrePass">EntrePass</option>
+                                    <option value="Intern">Intern</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Identification Number</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Passport Number</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Passport Date Of Issue</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Passport Date Of Expiry</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nationality</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Finance</h3>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="">Cost centre</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="form-holder">
+                    <div class="form-box">
+                        <h3><i class="fa fa-briefcase"></i> Next of kin (1)</h3>
+                        <!--<form action="">-->
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <!--<button>Add next of Kin</button>-->
+                        <!--</form>-->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <button type="button" onclick="updateEmployeeSetting( {{$employee->id}} )" data-loading-text="Updating..." class="btn green">Update</button>
+        {{-- @endif --}}
+        {!!  Form::close()  !!}
+        <!--End Profile Blog-->
+
+    </div>
+    <!--End Profile Body-->
+</div>
+
+
+{{--------------------------Show Notice MODALS-----------------}}
+<div class="modal fade show_notice in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myLargeModalLabel" class="modal-title show-notice-title">
+                    {{--Notice Title using Javascript--}}
+                </h4>
+            </div>
+            <div class="modal-body" id="show-notice-body">
+                {{--Notice full Description using Javascript--}}
+            </div>
+        </div>
+    </div>
+</div>
+{{------------------------END Notice MODALS---------------------}}
+@endif
+
+@stop
+
+@section('footerjs')
+@if ($active_company->license_expired != 1)
+{!! HTML::script('front_assets/plugins/fullcalendar/fullcalendar.min.js') !!}
+{!! HTML::script("front_assets/plugins/fullcalendar/lang-all.js") !!}
+
+<script>
+    /*
+     $(document).ready(function () {
+     
+     $('#calendar').fullCalendar({
+     lang: '{{Lang::getLocale()}}',
+     
+     editable: false,
+     eventLimit: true, // allow "more" link when too many events
+     eventRender: function (event, element) {
+     var i = document.createElement('i');
+     // Add all your other classes here that are common, for demo just 'fa'
+     i.className = 'fa';
+     i.classList.add(event.icon);
+     if (event.type == 'birthday') {
+     element.find('div.fc-content').prepend(i);
+     }
+     if (event.className == "holiday") {
+     var dataToFind = moment(event.start).format('YYYY-MM-DD');
+     $('.fc-day[data-date="' + dataToFind + '"]').css('background', 'rgba(255, 224, 205, 1)');
+     }
+     },
+     events: function (start, end, timezone, callback) {
+     jQuery.ajax({
+     url: '{{route('front.attendance.ajax_load_calender')}}',
+     type: 'POST',
+     dataType: 'json',
+     data: {
+     start: start.format(),
+     end: end.format()
+     },
+     success: function (doc) {
+     var events = [];
+     if (!!doc) {
+     $.map(doc, function (r) {
+     if (r.type == 'absent_other') {
+     icon = 'no';
+     type = r.type;
+     etitle = r.title + "-" + r.leaveType;
+     bgcolor = '#FF9800';
+     eClassName = ''
+     } else if (r.a_status == "absent") {
+     icon = 'no';
+     type = 'attendance';
+     bgcolor = '#e50000';
+     etitle = r.a_status + "-" + r.leaveType;
+     eClassName = '';
+     } else if (r.a_status == "present") {
+     icon = 'no';
+     type = 'attendance';
+     bgcolor = '';
+     etitle = r.a_status;
+     eClassName = '';
+     } else if (r.type == 'birthday') {
+     icon = 'fa-birthday-cake';
+     type = r.type;
+     etitle = r.title;
+     bgcolor = 'green';
+     eClassName = ''
+     } else {
+     icon = 'no';
+     type = 'holiday';
+     etitle = r.title;
+     bgcolor = 'grey';
+     eClassName = 'holiday'
+     }
+     events.push({
+     className: eClassName,
+     color: bgcolor,
+     'icon': icon,
+     type: type,
+     id: r.id,
+     title: etitle,
+     start: r.date
+     
+     });
+     });
+     }
+     callback(events);
+     }
+     });
+     }
+     
+     
+     });
+     
+     });
+     */
+
+
+    function show_notice(id) {
+    var url = "{{ route('front.notice_ajax',':id') }}";
+    url = url.replace(':id', id);
+    $.easyAjax({
+    url: url,
+            type: "GET",
+            data: $(".ajax_form").serialize(),
+            container: ".ajax_form",
+            success: function (response) {
+
+            $('.show-notice-title').html(response.title);
+            $('#show-notice-body').html(response.description);
+            },
+    });
+    }
+
+
+</script>
+@endif
+@stop

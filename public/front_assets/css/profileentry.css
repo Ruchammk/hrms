@@ -1,0 +1,270 @@
+*{
+	transition: 0.5s;
+}
+
+body{
+	font-family: 'Nunito', sans-serif;
+	font-size: 14.5px;
+	font-weight: 600;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Nunito', sans-serif;
+}
+
+p{
+	font-family: 'Nunito', sans-serif;
+}
+
+.navbar-inverse{
+	background: transparent;
+	border-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus{
+	color: #fff;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+    font-weight: 600;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.dashboard-navbar .navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.my-navbar .navbar-nav{
+	float: right;
+}
+
+#stripes {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-transform: skewY(-12deg);
+    transform: skewY(-12deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    /* background: #000046;  
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
+background: linear-gradient(to right, #1CB5E0, #000046);  */
+background: #18308a;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #021B79, #18308a, #0575E6);  
+background: linear-gradient(to left, #021B79, #18308a, #0575E6);
+
+
+
+
+}
+
+#stripes, #stripes span {
+    position: absolute;
+}
+
+#stripes :first-child {
+    width: 50%;
+    left: 50%;
+    top: 40px;
+    background: #0c5bc3;
+}
+
+#stripes :nth-child(2) {
+    width: 14%;
+    right: 0;
+    bottom: 40px;
+    background: #184fc6;
+}
+
+#stripes :nth-child(3) {
+    width: 25%;
+    bottom: 0;
+    right: 0;
+    background: #1a49af;
+}
+
+.my-navbar{
+	position: absolute;
+	width: 100%;
+}
+
+
+.dashboard-navbar{
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+}
+
+.dashboard-navbar .trail{
+	pointer-events: none;
+	cursor: default;
+}
+
+.fixed-dashboard{
+	width: 100%;
+	height: 100vh;
+	max-height: 100vh;
+	background: #18308a;
+	background: -webkit-linear-gradient(right, #021B79, #18308a, #0575E6);
+	background: -o-linear-gradient(right, #021B79, #18308a, #0575E6);
+	background: linear-gradient(to right, #021B79, #18308a, #0575E6); 
+}
+
+.navbar-default{
+	background: transparent;
+	border-color: transparent;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+	color: #fff;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+    font-weight: 600;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
+	color: #fff;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
+	background: transparent;
+	color: #fff;
+}
+
+.emp-item{
+	height: 100vh;
+}
+
+.emp-item ul{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 65%;
+	padding-left: 0px;
+}
+
+.emp-item .item-box{
+	float: left;
+	padding: 0px 30px;
+	width: 33.33%;
+	list-style-type: none;
+	text-align: center;
+}
+
+.emp-item .item-box img{
+	width: 110px;
+	text-align: center;
+}
+
+.emp-item .item-box h3{
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.logo img{
+	max-width: 110px;
+}
+
+.dashboard-navbar #navbar{
+	margin-top: 15px;
+}
+
+@media (min-width: 670px){
+	#stripes :first-child {
+	    top: 0;
+	    background: #0c5bc3;
+	}
+
+	#stripes :nth-child(2) {
+	    width: 16.66667%;
+	    width: calc(100% / 6);
+	    top: 300px;
+	    top: calc(150px * 2);
+	    bottom: auto;
+	    background: #184fc6;
+	}
+
+	#stripes :nth-child(3) {
+	    width: 33.33333%;
+	    width: calc(100% / 3);
+	    right: auto;
+	    background: #1a49af;
+	}
+
+	#stripes span {
+	    height: 150px;
+	}
+}
+
+
+@media (min-width: 880px){
+	#stripes :first-child {
+	    width: 33.33333%;
+	    width: calc(100% / 3);
+	    left: -16.66666%;
+	    left: calc(calc(calc(100% / 3) / 2) * -1);
+	    background: #0c5bc3;
+	}
+
+	#stripes span {
+	    height: 190px;
+	}
+
+	#stripes :nth-child(2) {
+	    width: 33.33333%;
+	    width: calc(100% / 3);
+	    top: 0;
+	    left: 16.66666%;
+	    left: calc(calc(100% / 3) / 2);
+	    right: auto;
+	    background: #184fc6;
+	}
+
+	#stripes :nth-child(3) {
+	    width: 33.33333%;
+	    width: calc(100% / 3);
+	    left: 49.99999%;
+	    left: calc(calc(calc(100% / 3) / 2) + calc(100% / 3));
+	    bottom: auto;
+	    background: #1a49af;
+	}
+
+	#stripes :nth-child(4) {
+	    width: 33.33333%;
+	    width: calc(100% / 3);
+	    top: 380px;
+	    top: calc(190px * 2);
+	    right: -16.66666%;
+	    right: calc(calc(calc(100% / 3) / 2) * -1);
+	    background: #0c2581;
+	}
+
+	#stripes :nth-child(5) {
+	    width: 33.33333%;
+	    width: calc(100% / 3);
+	    bottom: 0;
+	    background: #0f54ba;
+	}
+}
+
